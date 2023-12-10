@@ -558,15 +558,52 @@ footer>*:not(a) {
 .post-interactions {
 	display: flex;
 	gap: 20px;
+	margin-left: 14px;
+	align-items: center;
 }
 
-.troll-btn {
+.reaction-btn {
 	border: none;
 	display: grid;
 	background: transparent;
+	transition: .3s;
+	background: rgba(255, 255, 255, 0.729);
+	padding: 4px;
+	cursor: pointer;
 }
 
-.troll-reaction {
-	max-height: 30px;
+.reaction-btn:nth-child(1) {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.reaction-btn:not(.reaction-btn:nth-child(1)) {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.reaction-btn:hover {
+	transform: translateY(-7px);
+}
+
+.reactions-line {
+	width: 1px;
+	background: black;
+}
+
+.reaction-reaction {
+	max-height: 25px;
 	width: auto;
+}
+
+.reactions {
+	display: flex;
+	gap: 0;
+	padding: 3px;
+	border-radius: 5px;
+}
+
+.post-views {
+	font-size: 11pt;
+	color: rgba(255, 255, 255, 0.514);
 }

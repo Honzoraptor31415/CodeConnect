@@ -29,9 +29,10 @@
           repellendus officiis?????? Lul
         </p>
         <div class="post-interactions">
-          <div class="thumbs">
-            <button class="thumb"></button>
-            <button class="thumb"></button>
+          <div class="reactions">
+            <button class="reaction-btn"> </button>
+            <div class="reactions-line"></div>
+            <button class="reaction-btn"> </button>
           </div>
           <p class="post-views">Post was seen 69 times.</p>
         </div>
@@ -48,9 +49,10 @@
           repellendus officiis?????? Lul
         </p>
         <div class="post-interactions">
-          <div class="thumbs">
-            <button class="thumb"></button>
-            <button class="thumb"></button>
+          <div class="reactions">
+            <button class="reaction-btn"> </button>
+            <div class="reactions-line"></div>
+            <button class="reaction-btn"> </button>
           </div>
           <p class="post-views">Post was seen 69 times.</p>
         </div>
@@ -67,9 +69,10 @@
           repellendus officiis?????? Lul
         </p>
         <div class="post-interactions">
-          <div class="thumbs">
-            <button class="thumb"></button>
-            <button class="thumb"></button>
+          <div class="reactions">
+            <button class="reaction-btn"></button>
+            <div class="reactions-line"></div>
+            <button class="reaction-btn"> </button>
           </div>
           <p class="post-views">Post was seen 69 times.</p>
         </div>
@@ -86,13 +89,10 @@
           repellendus officiis?????? Lul
         </p>
         <div class="post-interactions">
-          <div class="trolls">
-            <button class="troll-btn">
-              <img src="yeh-troll-icon.svg" alt="" class="troll-reaction" />
-            </button>
-            <button class="troll-btn">
-              <img src="meh-troll-icon.svg" alt="" class="troll-reaction" />
-            </button>
+          <div class="reactions">
+            <button class="reaction-btn"> </button>
+            <div class="reactions-line"></div>
+            <button class="reaction-btn"> </button>
           </div>
           <p class="post-views">Post was seen 69 times.</p>
         </div>
