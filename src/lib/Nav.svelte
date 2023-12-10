@@ -28,7 +28,7 @@
       </a>
       <div class="menu">
         <a href="#about" class="menu-link">About</a>
-        <a href="/" class="menu-btn">Get started</a>
+        <a href="/signup" class="menu-btn">Get started</a>
       </div>
     </div>
   </nav>

@@ -333,3 +333,12 @@ footer>*:not(a) {
 .footer-name {
 	margin-block: 30px 5px;
 }
+
+.login-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 25px;
+	gap: 25px;
+}
