@@ -24,6 +24,7 @@ html {
 body {
 	min-height: 100vh;
 	background-color: var(--mainBG);
+	overflow-x: hidden;
 }
 
 header {
@@ -359,17 +360,19 @@ footer>*:not(a) {
 	background: rgb(40, 40, 40);
 	box-shadow: 0 0 7px rgba(0, 0, 0, 0.469);
 	z-index: 3;
+	max-width: 252px;
 }
 
 .login-form>input {
 	background: transparent;
 	border: 1px rgba(255, 255, 255, 0.514) solid;
 	padding: 8px 15px;
-	font-size: 12.5pt;
+	font-size: 12pt;
 	border-radius: 7px;
 	transition: .3s;
 	outline: none;
-	margin-block: 10px;
+	margin-block: 3px;
+	min-width: 220px;
 }
 
 .login-form>input:hover {
@@ -390,18 +393,57 @@ footer>*:not(a) {
 	transition: .3s;
 	border-radius: 7px;
 	background-size: 300px;
-	margin-top: 10px;
+	margin-top: 20px;
 }
 
 .login-form>button:hover {
 	background-position-x: 100px;
-	color: rgb(40, 40, 40);
-	font-weight: bold;
-	filter: none;
 }
 
 .form-header {
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
+}
+
+.login-form>label {
+	text-align: left;
+	width: 100%;
+	font-size: 11pt;
+	margin-top: 10px;
+	padding: 5px;
+	border-radius: 5px;
+	margin-left: -15px;
+	color: rgba(255, 255, 255, 0.726);
+	word-wrap: break-word;
+}
+
+.form-info {
+	color: rgba(255, 255, 255, 0.582);
+	font-size: 9pt;
+	font-style: italic;
+}
+
+.form-error {
+	color: red !important;
+	background: rgba(255, 0, 0, 0.264);
+}
+
+.about-text,
+#about {
+	animation: scroll-animation cubic-bezier(1, 0.37, 0.58, 1) both;
+	animation-timeline: view();
+	animation-range: entry 20% cover 30%
+}
+
+@keyframes scroll-animation {
+	from {
+		transform: translateX(-20vw) scale(0.8) skewX(9deg);
+		opacity: 0;
+	}
+
+	to {
+		transform: translateX(0) scale(1) skewX(0deg);
+		opacity: 1;
+	}
 }
