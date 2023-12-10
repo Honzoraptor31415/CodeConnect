@@ -19,7 +19,6 @@
   <Nav />
   <div class="login-form">
     <h3>Create an account</h3>
-    <!-- <label for="create-name">Displayed username</label> -->
     <label for="create-name">Displayed username</label>
     <input type="text" id="create-name" placeholder="Name" />
     <label for="create-email-input"

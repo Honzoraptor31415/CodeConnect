@@ -27,10 +27,17 @@
         />
       </a>
       <div class="menu">
-        <a href="/posts" class="menu-link">Posts</a>
-        <a href="/#about" class="menu-link">About</a>
-        <a href="/login" class="menu-link">Login</a>
-        <a href="/signup" class="menu-btn">Get started</a>
+        <div class="menu-links">
+          <a href="/posts" class="menu-link">Posts</a>
+          <a href="/" id="sign-out-user" class="menu-btn">Sign out</a>
+        </div>
+        <a class="pfp-link" href="/">
+          <img
+            src="user-icon.svg"
+            class="profile-img"
+            alt="User placeholder icon"
+          />
+        </a>
       </div>
     </div>
   </nav>

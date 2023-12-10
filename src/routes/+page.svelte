@@ -1,5 +1,7 @@
 <script>
   import Nav from "$lib/Nav.svelte";
+  import LoggedInNav from "../lib/LoggedInNav.svelte";
+  import LoggedDevNav from "../lib/LoggedDevNav.svelte";
   import Footer from "$lib/Footer.svelte";
   import BigDivLogo from "../lib/BigDivLogo.svelte";
   import "./styles.css";
@@ -16,7 +18,7 @@
 </script>
 
 <header>
-  <Nav />
+  <LoggedInNav />
   <div class="header-left">
     <h1 class="colored-text">CodeConnect</h1>
     <div class="header-text-wrp">

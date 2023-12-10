@@ -15,21 +15,21 @@
 </script>
 
 <Nav />
-<main>
-  <h2 id="about">About</h2>
+<main class="non-header-main">
+  <h2 id="about">Posts</h2>
   <p class="about-text">
-    Here on CodeConnect, you can get your dream apps to become true. If you're
-    not already, <a href="/login">log in</a> and <a href="/new">make a post</a>,
-    where you will describe what your <span class="colored-text">dream</span>
-    app should do and how it should look like. Any of the developers can then view
-    your post, text you via <span class="email">Email</span>,
-    <span class="messenger">Messenger</span>,
-    <span class="instagram">Instagram</span> or other platforms and make your dream
-    app come true!
-  </p>
-  <p class="about-text">
-    Are you a developer? <a href="/posts">View the posts</a> from others and start
-    coding!
+    Here I will later add posts, everything is currentely in progress. Lorem
+    ipsum dolor <span class="colored-text">sit</span> amet consectetur
+    adipisicing elit. Cupiditate, qui voluptatem. Neque quo officiis fuga
+    repudiandae assumenda dignissimos vel. Soluta totam maxime nemo, esse dicta
+    neque molestias aspernatur nihil beatae. Lorem ipsum dolor sit amet
+    <span class="colored-text">consectetur</span>, adipisicing elit. Nostrum
+    sint doloribus modi recusandae asperiores nemo dolor? Facilis accusantium
+    ullam exercitationem asperiores. Cum nihil ullam aliquid nostrum. Magni
+    veniam quae dicta. Unde quas <span class="colored-text">nostrum</span> harum
+    pariatur molestias fuga quia porro accusantium aliquam voluptates cum veniam
+    voluptas neque adipisci impedit minus quisquam saepe quam suscipit deleniti debitis
+    in, commodi necessitatibus magni. Magnam?
   </p>
 </main>
 <Footer />
