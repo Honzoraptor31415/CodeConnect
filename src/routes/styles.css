@@ -32,6 +32,9 @@ header {
 	align-items: center;
 	min-height: 100vh;
 	gap: 50px;
+}
+
+header:not(.form-header) {
 	animation: header-bg 60s linear infinite;
 }
 
@@ -334,11 +337,71 @@ footer>*:not(a) {
 	margin-block: 30px 5px;
 }
 
+/* .login-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 25px 30px;
+	gap: 25px;
+	border: 2px var(--mainFC) solid;
+	border-radius: 14px;
+	z-index: 3;
+} */
+
 .login-form {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding: 25px;
-	gap: 25px;
+	padding: 25px 30px;
+	border-radius: 14px;
+	background: rgb(40, 40, 40);
+	box-shadow: 0 0 7px rgba(0, 0, 0, 0.469);
+	z-index: 3;
+}
+
+.login-form>input {
+	background: transparent;
+	border: 1px rgba(255, 255, 255, 0.514) solid;
+	padding: 8px 15px;
+	font-size: 12.5pt;
+	border-radius: 7px;
+	transition: .3s;
+	outline: none;
+	margin-block: 10px;
+}
+
+.login-form>input:hover {
+	border-color: white;
+}
+
+.login-form>input:focus::placeholder {
+	color: var(--mainFC);
+}
+
+.login-form>button {
+	padding: 8px 15px;
+	font-size: 13pt;
+	background: -webkit-linear-gradient(180deg, var(--accent3), var(--accent));
+	filter: contrast(2);
+	border: none;
+	cursor: pointer;
+	transition: .3s;
+	border-radius: 7px;
+	background-size: 300px;
+	margin-top: 10px;
+}
+
+.login-form>button:hover {
+	background-position-x: 100px;
+	color: rgb(40, 40, 40);
+	font-weight: bold;
+	filter: none;
+}
+
+.form-header {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
 }

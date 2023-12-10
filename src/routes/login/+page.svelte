@@ -1,6 +1,7 @@
 <script>
   import Nav from "$lib/Nav.svelte";
   import Footer from "$lib/Footer.svelte";
+  import BigDivLogo from "../../lib/BigDivLogo.svelte";
   import "../styles.css";
   import { browser } from "$app/environment";
   if (browser) {

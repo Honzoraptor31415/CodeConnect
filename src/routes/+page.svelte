@@ -1,6 +1,7 @@
 <script>
   import Nav from "$lib/Nav.svelte";
   import Footer from "$lib/Footer.svelte";
+  import BigDivLogo from "../lib/BigDivLogo.svelte";
   import "./styles.css";
   import { browser } from "$app/environment";
   if (browser) {
@@ -27,16 +28,7 @@
     </div>
   </div>
   <div class="header-right">
-    <div class="cc-big-logo-wrp">
-      <div class="first-bubble logo-bubble"></div>
-      <div class="second-bubble logo-bubble"></div>
-      <div class="third-bubble logo-bubble"></div>
-      <div class="fourth-bubble logo-bubble">
-        <span style="font-size: 45pt;">{"<"}</span>
-        {"/"}
-        <span style="font-size: 45pt;">{">"}</span>
-      </div>
-    </div>
+    <BigDivLogo />
   </div>
 </header>
 <main>
@@ -45,8 +37,8 @@
     Here on CodeConnect, you can get your dream apps to become true. If you're
     not already, <a href="/login">log in</a> and <a href="/new">make a post</a>,
     where you will describe what your <span class="colored-text">dream</span>
-    app should do and how it should look like. Any of the developers can then
-    view your post, text you via <span class="email">Email</span>,
+    app should do and how it should look like. Any of the developers can then view
+    your post, text you via <span class="email">Email</span>,
     <span class="messenger">Messenger</span>,
     <span class="instagram">Instagram</span> or other platforms and make your dream
     app come true!

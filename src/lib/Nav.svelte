@@ -27,7 +27,8 @@
         />
       </a>
       <div class="menu">
-        <a href="#about" class="menu-link">About</a>
+        <a href="/login" class="menu-link">Login</a>
+        <a href="/#about" class="menu-link">About</a>
         <a href="/signup" class="menu-btn">Get started</a>
       </div>
     </div>
