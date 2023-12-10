@@ -17,19 +17,87 @@
 <Nav />
 <main class="non-header-main">
   <h2 id="about">Posts</h2>
-  <p class="about-text">
-    Here I will later add posts, everything is currentely in progress. Lorem
-    ipsum dolor <span class="colored-text">sit</span> amet consectetur
-    adipisicing elit. Cupiditate, qui voluptatem. Neque quo officiis fuga
-    repudiandae assumenda dignissimos vel. Soluta totam maxime nemo, esse dicta
-    neque molestias aspernatur nihil beatae. Lorem ipsum dolor sit amet
-    <span class="colored-text">consectetur</span>, adipisicing elit. Nostrum
-    sint doloribus modi recusandae asperiores nemo dolor? Facilis accusantium
-    ullam exercitationem asperiores. Cum nihil ullam aliquid nostrum. Magni
-    veniam quae dicta. Unde quas <span class="colored-text">nostrum</span> harum
-    pariatur molestias fuga quia porro accusantium aliquam voluptates cum veniam
-    voluptas neque adipisci impedit minus quisquam saepe quam suscipit deleniti debitis
-    in, commodi necessitatibus magni. Magnam?
-  </p>
+  <div class="posts-wrp">
+    <a href="/posts/postOne" class="post-link">
+      <div class="post">
+        <h3 class="post-heading">Post name</h3>
+        <p class="post-date">10.12. 2023</p>
+        <p class="post-text">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus
+          velit nam maiores, numquam pussy, enim quia suscipit sus unde
+          voluptates amogus omnis sapiente quam totam quaerat poopin' in
+          repellendus officiis?????? Lul
+        </p>
+        <div class="post-interactions">
+          <div class="thumbs">
+            <button class="thumb"></button>
+            <button class="thumb"></button>
+          </div>
+          <p class="post-views">Post was seen 69 times.</p>
+        </div>
+      </div>
+    </a>
+    <a href="/posts/postOne" class="post-link">
+      <div class="post">
+        <h3 class="post-heading">Post name</h3>
+        <p class="post-date">10.12. 2023</p>
+        <p class="post-text">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus
+          velit nam maiores, numquam pussy, enim quia suscipit sus unde
+          voluptates amogus omnis sapiente quam totam quaerat poopin' in
+          repellendus officiis?????? Lul
+        </p>
+        <div class="post-interactions">
+          <div class="thumbs">
+            <button class="thumb"></button>
+            <button class="thumb"></button>
+          </div>
+          <p class="post-views">Post was seen 69 times.</p>
+        </div>
+      </div>
+    </a>
+    <a href="/posts/postOne" class="post-link">
+      <div class="post">
+        <h3 class="post-heading">Post name</h3>
+        <p class="post-date">10.12. 2023</p>
+        <p class="post-text">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus
+          velit nam maiores, numquam pussy, enim quia suscipit sus unde
+          voluptates amogus omnis sapiente quam totam quaerat poopin' in
+          repellendus officiis?????? Lul
+        </p>
+        <div class="post-interactions">
+          <div class="thumbs">
+            <button class="thumb"></button>
+            <button class="thumb"></button>
+          </div>
+          <p class="post-views">Post was seen 69 times.</p>
+        </div>
+      </div>
+    </a>
+    <a href="/posts/postOne" class="post-link">
+      <div class="post">
+        <h3 class="post-heading">Post name</h3>
+        <p class="post-date">10.12. 2023</p>
+        <p class="post-text">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus
+          velit nam maiores, numquam pussy, enim quia suscipit sus unde
+          voluptates amogus omnis sapiente quam totam quaerat poopin' in
+          repellendus officiis?????? Lul
+        </p>
+        <div class="post-interactions">
+          <div class="trolls">
+            <button class="troll-btn">
+              <img src="yeh-troll-icon.svg" alt="" class="troll-reaction" />
+            </button>
+            <button class="troll-btn">
+              <img src="meh-troll-icon.svg" alt="" class="troll-reaction" />
+            </button>
+          </div>
+          <p class="post-views">Post was seen 69 times.</p>
+        </div>
+      </div>
+    </a>
+  </div>
 </main>
 <Footer />

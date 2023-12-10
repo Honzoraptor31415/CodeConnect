@@ -363,7 +363,8 @@ footer>*:not(a) {
 	max-width: 252px;
 }
 
-.login-form>input {
+.login-form>input,
+.posts-form>input {
 	background: transparent;
 	border: 1px rgba(255, 255, 255, 0.514) solid;
 	padding: 8px 15px;
@@ -375,15 +376,21 @@ footer>*:not(a) {
 	min-width: 220px;
 }
 
-.login-form>input:hover {
+.login-form>input:hover,
+.posts-form>input:hover,
+.posts-form>textarea:hover {
 	border-color: white;
 }
 
-.login-form>input:focus::placeholder {
+.login-form>input:focus::placeholder,
+.posts-form>input:focus::placeholder,
+.posts-form>textarea:focus::placeholder {
 	color: var(--mainFC);
 }
 
-.login-form>button {
+.login-form>button,
+.posts-form>button,
+.login-btn {
 	padding: 8px 15px;
 	font-size: 13pt;
 	background: -webkit-linear-gradient(180deg, var(--accent3), var(--accent));
@@ -396,8 +403,10 @@ footer>*:not(a) {
 	margin-top: 20px;
 }
 
-.login-form>button:hover {
-	background-position-x: 100px;
+.login-form>button:hover,
+.posts-form>button:hover,
+.login-btn:hover {
+	background-position-x: -100%;
 }
 
 .form-header {
@@ -406,7 +415,8 @@ footer>*:not(a) {
 	align-items: center;
 }
 
-.login-form>label {
+.login-form>label,
+.posts-form>label {
 	text-align: left;
 	width: 100%;
 	font-size: 11pt;
@@ -467,4 +477,96 @@ footer>*:not(a) {
 
 .non-header-main {
 	margin-top: 100px;
+}
+
+.posts-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	padding: 25px 30px;
+	border-radius: 14px;
+	background: rgb(40, 40, 40);
+	box-shadow: 0 0 7px rgba(0, 0, 0, 0.469);
+	z-index: 3;
+	width: 600px;
+}
+
+.posts-form>textarea {
+	background: transparent;
+	border: 1px rgba(255, 255, 255, 0.514) solid;
+	padding: 8px 15px;
+	font-size: 12pt;
+	border-radius: 7px;
+	transition: .3s;
+	outline: none;
+	margin-block: 3px;
+	resize: none;
+	width: 90%;
+	height: 210px;
+}
+
+.form-btn-right-wrp {
+	display: flex;
+	width: 100%;
+	justify-content: flex-end;
+}
+
+.posts-wrp {
+	max-width: 770px;
+	margin-top: 60px;
+	margin-left: 30px;
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+}
+
+.post {
+	background: rgb(40, 40, 40);
+	padding: 25px 30px;
+	border-radius: 14px;
+	text-decoration: none;
+}
+
+.post>* {
+	margin-block: 15px;
+}
+
+.post-heading {
+	font-size: 16pt;
+}
+
+.post-date {
+	margin-left: 7px;
+	font-size: 11pt;
+	color: rgba(255, 255, 255, 0.514);
+}
+
+.post-text {
+	margin-left: 14px;
+	font-size: 12.5pt;
+}
+
+.post-link {
+	transition: .3s;
+}
+
+.post-link:hover>.post {
+	background: rgb(48, 48, 48);
+}
+
+.post-interactions {
+	display: flex;
+	gap: 20px;
+}
+
+.troll-btn {
+	border: none;
+	display: grid;
+	background: transparent;
+}
+
+.troll-reaction {
+	max-height: 30px;
+	width: auto;
 }
