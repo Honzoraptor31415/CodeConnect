@@ -20,14 +20,8 @@
   <div class="login-form">
     <h3>Create new post</h3>
     <label for="create-post-name">Post name</label>
-    <input type="text" id="create-name" placeholder="Name" />
-    <label for="create-email-input"
-      >Email <span class="form-info">(not publicly shown)</span></label
-    >
-    <input type="text" id="create-email-input" placeholder="Email" />
-    <label for="create-password-input">Password</label>
-    <input type="password" id="create-password-input" placeholder="Password" />
-    <button class="login-btn" id="login-submit">Sign up</button>
+    <input type="text" id="create-post-name" placeholder="Name" />
+    <button class="login-btn" id="login-submit">Post</button>
   </div>
 </header>
 <Footer />

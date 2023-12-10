@@ -18,7 +18,7 @@
 </script>
 
 <header>
-  <LoggedInNav />
+  <Nav />
   <div class="header-left">
     <h1 class="colored-text">CodeConnect</h1>
     <div class="header-text-wrp">
