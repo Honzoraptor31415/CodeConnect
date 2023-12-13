@@ -1,28 +1,47 @@
-<script>
+<script context="module">
   export let data;
   let pages;
+  console.log(data);
+
+  import { getDatabase, ref, child, get } from "firebase/database";
+  import { initializeApp } from "Firebase/app";
+  initializeApp({
+    apiKey: "AIzaSyAmXYl8867i7nkXHo31bwdIMoeWb35v4I4",
+    authDomain: "codeconnect-93fef.firebaseapp.com",
+    databaseURL:
+      "https://codeconnect-93fef-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "codeconnect-93fef",
+    storageBucket: "codeconnect-93fef.appspot.com",
+    messagingSenderId: "747780271550",
+    appId: "1:747780271550:web:f6680e4af9f41f4d4cddef",
+  });
+  const dbRef = ref(getDatabase());
+  get(child(dbRef, `cc/`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log(snapshot.val().pages);
+        pages = snapshot.val().pages;
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 </script>
 
-<!-- <body>
-  Loading
+<body>
+  Loading data
   {#await pages}
     <main>
-      {#if pages && pages.includes(data.post)}
+      {#if pages.includes(data.post)}
         <h1>You are currentely in {data.post}</h1>
       {:else}
         <h1>This page doesn't exist</h1>
       {/if}
     </main>
   {/await}
-</body> -->
-
-<body>
-  <main>
-    <h1>You are currentely in {data.post}</h1>
-  </main>
 </body>
-
-<!-- <h1>You are currentely in {data.post}</h1> -->
 
 <style>
   * {
