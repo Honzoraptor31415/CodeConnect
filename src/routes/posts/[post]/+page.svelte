@@ -1,7 +1,5 @@
-<script context="module">
-  export let data;
+<script context="module" preload>
   let pages;
-  console.log(data);
 
   import { getDatabase, ref, child, get } from "firebase/database";
   import { initializeApp } from "Firebase/app";
@@ -16,6 +14,7 @@
     appId: "1:747780271550:web:f6680e4af9f41f4d4cddef",
   });
   const dbRef = ref(getDatabase());
+
   get(child(dbRef, `cc/`))
     .then((snapshot) => {
       if (snapshot.exists()) {
@@ -28,19 +27,17 @@
     .catch((error) => {
       console.error(error);
     });
+  console.log(pages);
+</script>
+
+<script>
+  export let data;
 </script>
 
 <body>
-  Loading data
-  {#await pages}
-    <main>
-      {#if pages.includes(data.post)}
-        <h1>You are currentely in {data.post}</h1>
-      {:else}
-        <h1>This page doesn't exist</h1>
-      {/if}
-    </main>
-  {/await}
+  <h1>You're currentely in {data.post}</h1>
+
+  <h2>{pages}</h2>
 </body>
 
 <style>
@@ -70,8 +67,5 @@
   }
   h1 {
     font-weight: 100;
-  }
-  main {
-    text-align: center;
   }
 </style>
