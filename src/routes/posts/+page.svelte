@@ -56,8 +56,26 @@
       {#each dataPages as page}
         <div class="post">
           <h3 class="post-heading">{page.name}</h3>
-          <p class="post-date">{page.date}</p>
-          <p class="post-text">{page.text}</p>
+          <div class="post-top-info">
+            <div class="post-pfp-wrp">
+              <img
+                src="gandalf-macbook.jpg"
+                alt="User's pfp"
+                class="post-user-pfp"
+              />
+            </div>
+            <p class="post-date">{page.date}</p>
+          </div>
+          <p class="post-text">
+            {#if page.text.length <= 500}
+              {page.text}
+            {:else}
+              {@html `${page.text.slice(
+                0,
+                496,
+              )} <span class="post-mtc">...</span>`}
+            {/if}
+          </p>
           <div class="post-interactions">
             <div class="post-ints-left">
               <div class="reactions">

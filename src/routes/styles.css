@@ -179,7 +179,7 @@ h1 {
 
 h2 {
 	font-size: 27pt;
-	padding: 0 22px 12px 22px;
+	padding: 0 22px 30px 22px;
 	border-radius: 10px;
 	border-bottom: 4px var(--mainFC) solid;
 	width: fit-content;
@@ -433,7 +433,7 @@ footer>*:not(a) {
 
 @keyframes scroll-animation {
 	from {
-		transform: translateX(-20vw) scale(0.8) skewX(9deg);
+		transform: translateX(-50px) scale(0.8) skewX(9deg);
 		opacity: 0;
 	}
 
@@ -499,18 +499,18 @@ footer>*:not(a) {
 
 .posts-wrp {
 	width: 70%;
-	margin-top: 60px;
+	margin-top: 40px;
 	margin-inline: auto;
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 	padding: 30px;
 	border-radius: 9px;
-	background: rgb(20, 20, 20);
+	background: var(--secBG);
 }
 
 .post {
-	background: rgb(40, 40, 40);
+	background: linear-gradient(340deg, var(--secBG), 60%, rgb(54, 54, 54));
 	padding: 10px;
 	border-radius: 9px;
 	text-decoration: none;
@@ -523,6 +523,12 @@ footer>*:not(a) {
 .post:hover {
 	transform: translateY(-3px);
 	box-shadow: 0px 10px 15px 4px rgba(0, 0, 0, 0.322);
+	background-position-x: 60px;
+}
+
+.post:hover>h3,
+.post:hover>.post-text {
+	color: white;
 }
 
 .reaction-counter,
@@ -552,6 +558,12 @@ footer>*:not(a) {
 
 .post-heading {
 	font-size: 16pt;
+}
+
+.post-heading,
+.post-text {
+	color: rgba(255, 255, 255, 0.699);
+	transition: .3s;
 }
 
 .post-date {
@@ -624,4 +636,32 @@ footer>*:not(a) {
 	gap: 20px;
 }
 
-/* .view-post-link {} */
+.post-mtc {
+	color: rgba(255, 255, 255, 0.565);
+	font-size: 14pt;
+	margin-left: 4px;
+}
+
+.post-top-info {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+.post-user-pfp {
+	max-height: 40px;
+	width: auto;
+	position: absolute;
+	clip-path: circle(20px at 20px 50%)
+}
+
+.pfp-default {
+	filter: invert(100%);
+}
+
+.post-pfp-wrp {
+	position: relative;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
