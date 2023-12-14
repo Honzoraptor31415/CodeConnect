@@ -36,9 +36,6 @@
           for (let i = 0; i < Object.keys(snapshot.val()).length; i++) {
             pages.push(snapshot.val()[Object.keys(snapshot.val())[i]]);
           }
-          // return pages;
-
-          console.log(pages);
         } else {
           console.log("No data available");
         }
@@ -122,5 +119,4 @@
     {/await}
   </div>
 </main>
-
 <Footer />
