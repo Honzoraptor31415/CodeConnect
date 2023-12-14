@@ -1,4 +1,4 @@
-<script>
+<script context="module">
   import Nav from "$lib/Nav.svelte";
   import Footer from "$lib/Footer.svelte";
   import "../styles.css";
@@ -12,66 +12,115 @@
       false,
     );
   }
+
+  import { getDatabase, ref, child, get } from "firebase/database";
+  import { initializeApp } from "Firebase/app";
+  initializeApp({
+    apiKey: "AIzaSyAmXYl8867i7nkXHo31bwdIMoeWb35v4I4",
+    authDomain: "codeconnect-93fef.firebaseapp.com",
+    databaseURL:
+      "https://codeconnect-93fef-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "codeconnect-93fef",
+    storageBucket: "codeconnect-93fef.appspot.com",
+    messagingSenderId: "747780271550",
+    appId: "1:747780271550:web:f6680e4af9f41f4d4cddef",
+  });
+
+  let pages = [];
+
+  async function loadData() {
+    const dbRef = ref(getDatabase());
+    const data = await get(child(dbRef, `cc/pages`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          for (let i = 0; i < Object.keys(snapshot.val()).length; i++) {
+            pages.push(snapshot.val()[Object.keys(snapshot.val())[i]]);
+          }
+          // return pages;
+
+          console.log(pages);
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    return pages;
+  }
 </script>
 
 <Nav />
 <main class="non-header-main">
-  <h2 id="about">Posts</h2>
+  <h2>Posts</h2>
   <div class="posts-wrp">
-    <div class="post">
-      <h3 class="post-heading">Post name</h3>
-      <p class="post-date">10.12. 2023</p>
-      <p class="post-text">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-        velit nam maiores, numquam pussy, enim quia suscipit sus unde voluptates
-        amogus omnis sapiente quam totam quaerat poopin' in repellendus
-        officiis?????? Lul
-      </p>
-      <div class="post-interactions">
-        <div class="post-ints-left">
-          <div class="reactions">
-            <button
-              on:click={() => {
-                if (
-                  document
-                    .getElementById("p1")
-                    .classList.contains("liked-reaction-btn")
-                ) {
-                  document
-                    .getElementById("p1")
-                    .classList.remove("liked-reaction-btn");
-                  document.getElementById("p1t").innerText =
-                    parseInt(document.getElementById("p1t").innerText) - 1;
-                } else {
-                  document
-                    .getElementById("p1")
-                    .classList.add("liked-reaction-btn");
-                  document.getElementById("p1t").innerText =
-                    parseInt(document.getElementById("p1t").innerText) + 1;
-                }
-              }}
-              id="p1"
-              class="reaction-btn"
-            >
-              <img
-                src="heart-icon.svg"
-                class="reaction-icon no-user-drag"
-                alt="Heart icon"
-              />
-              <p id="p1t" class="reaction-counter">
-                {Math.floor(Math.random() * 1000)}
+    {#await loadData() then dataPages}
+      {#each dataPages as page}
+        <div class="post">
+          <h3 class="post-heading">{page.name}</h3>
+          <p class="post-date">{page.date}</p>
+          <p class="post-text">{page.text}</p>
+          <div class="post-interactions">
+            <div class="post-ints-left">
+              <div class="reactions">
+                <button
+                  id={`p${pages.indexOf(page)}`}
+                  on:click={() => {
+                    if (
+                      document
+                        .getElementById(`p${pages.indexOf(page)}`)
+                        .classList.contains("liked-reaction-btn")
+                    ) {
+                      document
+                        .getElementById(`p${pages.indexOf(page)}`)
+                        .classList.remove("liked-reaction-btn");
+                      document.getElementById(
+                        `p${pages.indexOf(page)}t`,
+                      ).innerText =
+                        parseInt(
+                          document.getElementById(`p${pages.indexOf(page)}t`)
+                            .innerText,
+                        ) - 1;
+                    } else {
+                      document
+                        .getElementById(`p${pages.indexOf(page)}`)
+                        .classList.add("liked-reaction-btn");
+                      document.getElementById(
+                        `p${pages.indexOf(page)}t`,
+                      ).innerText =
+                        parseInt(
+                          document.getElementById(`p${pages.indexOf(page)}t`)
+                            .innerText,
+                        ) + 1;
+                    }
+                  }}
+                  class="reaction-btn"
+                >
+                  <img
+                    src="heart-icon.svg"
+                    class="reaction-icon no-user-drag"
+                    alt="Heart icon"
+                  />
+                  <p id={`p${pages.indexOf(page)}t`} class="reaction-counter">
+                    {page.likes}
+                  </p>
+                </button>
+              </div>
+              <p class="post-views">
+                Seen {page.views}
               </p>
-            </button>
+            </div>
+            <div class="post-ints-right">
+              <a href="#something" class="view-post-link">View post →</a>
+            </div>
           </div>
-          <p class="post-views">
-            Seen {Math.floor(Math.random() * 10000)} times.
-          </p>
         </div>
-        <div class="post-ints-right">
-          <a href="/posts/onePost" class="view-post-link">View post →</a>
-        </div>
-      </div>
-    </div>
+      {:else}
+        <h4>No data available</h4>
+      {/each}
+    {/await}
   </div>
 </main>
+
 <Footer />
