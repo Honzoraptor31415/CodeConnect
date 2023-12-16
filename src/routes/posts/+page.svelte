@@ -36,6 +36,7 @@
           for (let i = 0; i < Object.keys(snapshot.val()).length; i++) {
             pages.push(snapshot.val()[Object.keys(snapshot.val())[i]]);
           }
+          pages.reverse();
         } else {
           console.log("No data available");
         }
@@ -80,33 +81,27 @@
             <div class="post-ints-left">
               <div class="reactions">
                 <button
-                  id={`p${pages.indexOf(page)}`}
+                  id={`p${page.path}`}
                   on:click={() => {
                     if (
                       document
-                        .getElementById(`p${pages.indexOf(page)}`)
+                        .getElementById(`p${page.path}`)
                         .classList.contains("liked-reaction-btn")
                     ) {
                       document
-                        .getElementById(`p${pages.indexOf(page)}`)
+                        .getElementById(`p${page.path}`)
                         .classList.remove("liked-reaction-btn");
-                      document.getElementById(
-                        `p${pages.indexOf(page)}t`,
-                      ).innerText =
+                      document.getElementById(`p${page.path}t`).innerText =
                         parseInt(
-                          document.getElementById(`p${pages.indexOf(page)}t`)
-                            .innerText,
+                          document.getElementById(`p${page.path}t`).innerText,
                         ) - 1;
                     } else {
                       document
-                        .getElementById(`p${pages.indexOf(page)}`)
+                        .getElementById(`p${page.path}`)
                         .classList.add("liked-reaction-btn");
-                      document.getElementById(
-                        `p${pages.indexOf(page)}t`,
-                      ).innerText =
+                      document.getElementById(`p${page.path}t`).innerText =
                         parseInt(
-                          document.getElementById(`p${pages.indexOf(page)}t`)
-                            .innerText,
+                          document.getElementById(`p${page.path}t`).innerText,
                         ) + 1;
                     }
                   }}
@@ -117,7 +112,7 @@
                     class="reaction-icon no-user-drag"
                     alt="Heart icon"
                   />
-                  <p id={`p${pages.indexOf(page)}t`} class="reaction-counter">
+                  <p id={`p${page.path}t`} class="reaction-counter">
                     {page.likes}
                   </p>
                 </button>
@@ -127,7 +122,9 @@
               </p>
             </div>
             <div class="post-ints-right">
-              <a href="#something" class="view-post-link">View post →</a>
+              <a href={`posts/${page.path}`} class="view-post-link"
+                >View post →</a
+              >
             </div>
           </div>
         </div>

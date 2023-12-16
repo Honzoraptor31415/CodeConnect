@@ -13,6 +13,7 @@
   });
 
   let paths = [];
+  let postsArr = [];
 
   async function loadData() {
     const dbRef = ref(getDatabase());
@@ -20,6 +21,9 @@
       .then((snapshot) => {
         if (snapshot.exists()) {
           paths = Object.keys(snapshot.val());
+          for (let i = 0; i < Object.keys(snapshot.val()).length; i++) {
+            postsArr.push(snapshot.val()[Object.keys(snapshot.val())[i]]);
+          }
         } else {
           console.log("No data available");
         }
@@ -27,31 +31,14 @@
       .catch((error) => {
         console.error(error);
       });
-    return paths;
+    return [paths, postsArr];
   }
 </script>
 
 <script>
   import "../../styles.css";
   export let data;
-</script>
 
-<h1>You're on {data.post}</h1>
-{#await loadData() then dataPages}
-  {#if dataPages.includes(data.post)}
-    <h1>Exists in da DB</h1>
-  {:else}
-    <h1>Doesn't exist in da DB</h1>
-  {/if}
-  {#each dataPages as page}
-    <p>{page}</p>
-  {/each}
-  <p>{dataPages}</p>
-  <p>{data.post}</p>
-{/await}
-
-<!-- <script context="module">
-  import "../styles.css";
   import { browser } from "$app/environment";
   if (browser) {
     document.addEventListener(
@@ -62,127 +49,115 @@
       false,
     );
   }
-
-  import { getDatabase, ref, child, get } from "firebase/database";
-  import { initializeApp } from "Firebase/app";
-  initializeApp({
-    apiKey: "AIzaSyAmXYl8867i7nkXHo31bwdIMoeWb35v4I4",
-    authDomain: "codeconnect-93fef.firebaseapp.com",
-    databaseURL:
-      "https://codeconnect-93fef-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "codeconnect-93fef",
-    storageBucket: "codeconnect-93fef.appspot.com",
-    messagingSenderId: "747780271550",
-    appId: "1:747780271550:web:f6680e4af9f41f4d4cddef",
-  });
-
-  let pages = [];
-
-  async function loadData() {
-    const dbRef = ref(getDatabase());
-    const data = await get(child(dbRef, `cc/pages`))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          for (let i = 0; i < Object.keys(snapshot.val()).length; i++) {
-            pages.push(snapshot.val()[Object.keys(snapshot.val())[i]]);
-          }
-        } else {
-          console.log("No data available");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
-    return pages;
-  }
 </script>
 
-<main class="non-header-main">
-  <h2>Posts</h2>
-  <div class="posts-wrp">
-    {#await loadData() then dataPages}
-      {#each dataPages as page}
-        <div class="post">
-          <h3 class="post-heading">{page.name}</h3>
-          <div class="post-top-info">
-            <div class="post-pfp-wrp">
-              <img
-                src="gandalf-macbook.jpg"
-                alt="User's pfp"
-                class="post-user-pfp"
-              />
-            </div>
-            <p class="post-date">{page.date}</p>
-          </div>
-          <p class="post-text">
-            {#if page.text.length <= 500}
-              {page.text}
-            {:else}
-              {@html `${page.text.slice(
-                0,
-                496,
-              )} <span class="post-mtc">...</span>`}
-            {/if}
-          </p>
-          <div class="post-interactions">
-            <div class="post-ints-left">
-              <div class="reactions">
-                <button
-                  id={`p${pages.indexOf(page)}`}
-                  on:click={() => {
-                    if (
-                      document
-                        .getElementById(`p${pages.indexOf(page)}`)
-                        .classList.contains("liked-reaction-btn")
-                    ) {
-                      document
-                        .getElementById(`p${pages.indexOf(page)}`)
-                        .classList.remove("liked-reaction-btn");
-                      document.getElementById(
-                        `p${pages.indexOf(page)}t`,
-                      ).innerText =
-                        parseInt(
-                          document.getElementById(`p${pages.indexOf(page)}t`)
-                            .innerText,
-                        ) - 1;
-                    } else {
-                      document
-                        .getElementById(`p${pages.indexOf(page)}`)
-                        .classList.add("liked-reaction-btn");
-                      document.getElementById(
-                        `p${pages.indexOf(page)}t`,
-                      ).innerText =
-                        parseInt(
-                          document.getElementById(`p${pages.indexOf(page)}t`)
-                            .innerText,
-                        ) + 1;
-                    }
-                  }}
-                  class="reaction-btn"
-                >
-                  <img
-                    src="heart-icon.svg"
-                    class="reaction-icon no-user-drag"
-                    alt="Heart icon"
-                  />
-                  <p id={`p${pages.indexOf(page)}t`} class="reaction-counter">
-                    {page.likes}
-                  </p>
-                </button>
-              </div>
-              <p class="post-views">
-                Seen {page.views}
-              </p>
-            </div>
-            <div class="post-ints-right">
-              <a href="#something" class="view-post-link">View post →</a>
-            </div>
-          </div>
+{#await loadData() then dataPages}
+  {#if dataPages[0].includes(data.post)}
+    <div class="pp-post">
+      <h3 class="post-heading">
+        {dataPages[1][dataPages[0].indexOf(data.post)].name}
+      </h3>
+      <div class="post-top-info">
+        <div class="post-pfp-wrp">
+          <img
+            src="../gandalf-macbook.jpg"
+            alt="User's pfp"
+            class="post-user-pfp"
+          />
         </div>
-      {:else}
-        <h4>No data available</h4>
-      {/each}
-    {/await}
-  </div>
-</main> -->
+        <p class="post-date">
+          {dataPages[1][dataPages[0].indexOf(data.post)].date}
+        </p>
+      </div>
+      <p class="post-text">
+        {dataPages[1][dataPages[0].indexOf(data.post)].text}
+      </p>
+      <div class="post-interactions">
+        <div class="post-ints-left">
+          <div class="reactions">
+            <button
+              id="reaction-btn"
+              on:click={() => {
+                if (
+                  document
+                    .getElementById(`reaction-btn`)
+                    .classList.contains("liked-reaction-btn")
+                ) {
+                  document
+                    .getElementById(`reaction-btn`)
+                    .classList.remove("liked-reaction-btn");
+                  document.getElementById(`reaction-counter`).innerText =
+                    parseInt(
+                      document.getElementById(`reaction-counter`).innerText,
+                    ) - 1;
+                } else {
+                  document
+                    .getElementById(`reaction-btn`)
+                    .classList.add("liked-reaction-btn");
+                  document.getElementById(`reaction-counter`).innerText =
+                    parseInt(
+                      document.getElementById(`reaction-counter`).innerText,
+                    ) + 1;
+                }
+              }}
+              class="reaction-btn"
+            >
+              <img
+                src="../heart-icon.svg"
+                class="reaction-icon no-user-drag"
+                alt="Heart icon"
+              />
+              <p id="reaction-counter" class="reaction-counter">
+                {dataPages[1][dataPages[0].indexOf(data.post)].likes}
+              </p>
+            </button>
+          </div>
+          <p class="post-views">
+            Seen {dataPages[1][dataPages[0].indexOf(data.post)].views}
+          </p>
+        </div>
+      </div>
+    </div>
+  {:else}
+    <body>
+      <main>
+        <h1>This post doesn't exist.</h1>
+        <a href="/posts">Back to posts</a>
+      </main>
+    </body>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: rgb(40, 40, 40);
+        margin: 0;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          Oxygen,
+          Ubuntu,
+          Cantarell,
+          "Open Sans",
+          "Helvetica Neue",
+          sans-serif;
+        color: rgba(255, 255, 255, 0.736);
+      }
+      h1 {
+        font-weight: 100;
+        border: none;
+      }
+      main {
+        text-align: center;
+      }
+    </style>
+  {/if}
+{/await}
