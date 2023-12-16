@@ -1,24 +1,13 @@
 <script>
-  import Nav from "$lib/Nav.svelte";
-  import LoggedInNav from "../lib/LoggedInNav.svelte";
-  import LoggedDevNav from "../lib/LoggedDevNav.svelte";
-  import Footer from "$lib/Footer.svelte";
   import BigDivLogo from "../lib/BigDivLogo.svelte";
   import "./styles.css";
   import { browser } from "$app/environment";
   if (browser) {
-    document.addEventListener(
-      "contextmenu",
-      function (ev) {
-        ev.preventDefault();
-      },
-      false,
-    );
+    document.title = "CodeConnect - The place, where your dreams come true!";
   }
 </script>
 
 <header>
-  <Nav />
   <div class="header-left">
     <h1 class="colored-text">CodeConnect</h1>
     <div class="header-text-wrp">
@@ -50,4 +39,3 @@
     coding!
   </p>
 </main>
-<Footer />

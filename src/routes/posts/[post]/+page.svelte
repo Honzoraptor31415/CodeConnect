@@ -12,10 +12,9 @@
     appId: "1:747780271550:web:f6680e4af9f41f4d4cddef",
   });
 
-  let paths = [];
-  let postsArr = [];
-
   async function loadData() {
+    let paths = [];
+    let postsArr = [];
     const dbRef = ref(getDatabase());
     const dbData = await get(child(dbRef, `cc/pages`))
       .then((snapshot) => {
@@ -37,29 +36,17 @@
 
 <script>
   import "../../styles.css";
-  import Nav from "$lib/Nav.svelte";
-  import LoggedInNav from "$lib/LoggedInNav.svelte";
-  import LoggedDevNav from "$lib/LoggedDevNav.svelte";
-  import Footer from "$lib/Footer.svelte";
   import GandalfLogo from "$lib/images/gandalf-macbook.jpg";
   export let data;
-
   import { browser } from "$app/environment";
   if (browser) {
-    document.addEventListener(
-      "contextmenu",
-      function (ev) {
-        ev.preventDefault();
-      },
-      false,
-    );
+    document.title = "One post";
   }
 </script>
 
 <div class="pp-wrp">
   {#await loadData() then dataPages}
     {#if dataPages[0].includes(data.post)}
-      <Nav />
       <div class="pp-post">
         <h3 class="post-heading">
           {dataPages[1][dataPages[0].indexOf(data.post)].name}
@@ -165,4 +152,3 @@
     {/if}
   {/await}
 </div>
-<Footer />

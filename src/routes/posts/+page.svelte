@@ -1,19 +1,10 @@
 <script context="module">
-  import Nav from "$lib/Nav.svelte";
-  import LoggedDevNav from "$lib/LoggedDevNav.svelte";
-  import Footer from "$lib/Footer.svelte";
   import GandalfLogo from "$lib/images/gandalf-macbook.jpg";
   import "../styles.css";
+
   import { browser } from "$app/environment";
-  let loaded = false;
   if (browser) {
-    document.addEventListener(
-      "contextmenu",
-      function (ev) {
-        ev.preventDefault();
-      },
-      false,
-    );
+    document.title = "Posts";
   }
 
   import { getDatabase, ref, child, get } from "firebase/database";
@@ -51,7 +42,6 @@
   }
 </script>
 
-<LoggedDevNav />
 <main class="non-header-main">
   <h2>Posts</h2>
   <div id="post-wrp" class="posts-wrp">
@@ -132,4 +122,3 @@
     {/await}
   </div>
 </main>
-<Footer />
