@@ -1,6 +1,8 @@
 <script context="module">
   import Nav from "$lib/Nav.svelte";
+  import LoggedDevNav from "$lib/LoggedDevNav.svelte";
   import Footer from "$lib/Footer.svelte";
+  import GandalfLogo from "$lib/images/gandalf-macbook.jpg";
   import "../styles.css";
   import { browser } from "$app/environment";
   if (browser) {
@@ -49,88 +51,86 @@
   }
 </script>
 
-<Nav />
+<LoggedDevNav />
 <main class="non-header-main">
   <h2>Posts</h2>
   <div class="posts-wrp">
     {#await loadData() then dataPages}
-      {#each dataPages as page}
-        <div class="post">
-          <h3 class="post-heading">{page.name}</h3>
-          <div class="post-top-info">
-            <div class="post-pfp-wrp">
-              <img
-                src="gandalf-macbook.jpg"
-                alt="User's pfp"
-                class="post-user-pfp"
-              />
-            </div>
-            <p class="post-date">{page.date}</p>
-          </div>
-          <p class="post-text">
-            {#if page.text.length <= 500}
-              {page.text}
-            {:else}
-              {@html `${page.text.slice(
-                0,
-                496,
-              )} <span class="post-mtc">...</span>`}
-            {/if}
-          </p>
-          <div class="post-interactions">
-            <div class="post-ints-left">
-              <div class="reactions">
-                <button
-                  id={`p${page.path}`}
-                  on:click={() => {
-                    if (
-                      document
-                        .getElementById(`p${page.path}`)
-                        .classList.contains("liked-reaction-btn")
-                    ) {
-                      document
-                        .getElementById(`p${page.path}`)
-                        .classList.remove("liked-reaction-btn");
-                      document.getElementById(`p${page.path}t`).innerText =
-                        parseInt(
-                          document.getElementById(`p${page.path}t`).innerText,
-                        ) - 1;
-                    } else {
-                      document
-                        .getElementById(`p${page.path}`)
-                        .classList.add("liked-reaction-btn");
-                      document.getElementById(`p${page.path}t`).innerText =
-                        parseInt(
-                          document.getElementById(`p${page.path}t`).innerText,
-                        ) + 1;
-                    }
-                  }}
-                  class="reaction-btn"
-                >
-                  <img
-                    src="heart-icon.svg"
-                    class="reaction-icon no-user-drag"
-                    alt="Heart icon"
-                  />
-                  <p id={`p${page.path}t`} class="reaction-counter">
-                    {page.likes}
-                  </p>
-                </button>
+      {#if browser && document.getElementsByClassName("post").length < 1}
+        {#each dataPages as page}
+          <div class="post">
+            <h3 class="post-heading">{page.name}</h3>
+            <div class="post-top-info">
+              <div class="post-pfp-wrp">
+                <img src={GandalfLogo} alt="User's pfp" class="post-user-pfp" />
               </div>
-              <p class="post-views">
-                Seen {page.views}
-              </p>
+              <p class="post-date">{page.date}</p>
             </div>
-            <div class="post-ints-right">
-              <a href={`posts/${page.path}`} class="view-post-link"
-                >View post →</a
-              >
+            <p class="post-text">
+              {#if page.text.length <= 500}
+                {page.text}
+              {:else}
+                {@html `${page.text.slice(
+                  0,
+                  496,
+                )} <span class="post-mtc">...</span>`}
+              {/if}
+            </p>
+            <div class="post-interactions">
+              <div class="post-ints-left">
+                <div class="reactions">
+                  <button
+                    id={`p${page.path}`}
+                    on:click={() => {
+                      if (
+                        document
+                          .getElementById(`p${page.path}`)
+                          .classList.contains("liked-reaction-btn")
+                      ) {
+                        document
+                          .getElementById(`p${page.path}`)
+                          .classList.remove("liked-reaction-btn");
+                        document.getElementById(`p${page.path}t`).innerText =
+                          parseInt(
+                            document.getElementById(`p${page.path}t`).innerText,
+                          ) - 1;
+                      } else {
+                        document
+                          .getElementById(`p${page.path}`)
+                          .classList.add("liked-reaction-btn");
+                        document.getElementById(`p${page.path}t`).innerText =
+                          parseInt(
+                            document.getElementById(`p${page.path}t`).innerText,
+                          ) + 1;
+                      }
+                    }}
+                    class="reaction-btn"
+                  >
+                    <img
+                      src="heart-icon.svg"
+                      class="reaction-icon no-user-drag"
+                      alt="Heart icon"
+                    />
+                    <p id={`p${page.path}t`} class="reaction-counter">
+                      {page.likes}
+                    </p>
+                  </button>
+                </div>
+                <p class="post-views">
+                  Seen {page.views}x
+                </p>
+              </div>
+              <div class="post-ints-right">
+                <a href={`posts/${page.path}`} class="view-post-link"
+                  >View post →</a
+                >
+              </div>
             </div>
           </div>
-        </div>
-      {:else}
-        <h4>No data available</h4>
-      {/each}
+        {:else}
+          <h4>No data available</h4>
+        {/each}
+      {/if}
     {/await}
   </div>
 </main>

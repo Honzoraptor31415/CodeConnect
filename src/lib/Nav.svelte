@@ -1,5 +1,6 @@
 <script>
   import { browser } from "$app/environment";
+  import Logo from "$lib/images/code-connect-icon.svg";
 
   if (browser) {
     document.addEventListener("scroll", () => {
@@ -20,11 +21,7 @@
   <nav id="desktop-nav">
     <div class="nav-content">
       <a href="/" class="logo-link">
-        <img
-          src="code-connect-icon.svg"
-          alt="CodeConnect logo"
-          class="nav-logo"
-        />
+        <img src={Logo} alt="CodeConnect logo" class="nav-logo" />
       </a>
       <div class="menu">
         <a href="/posts" class="menu-link">Posts</a>
