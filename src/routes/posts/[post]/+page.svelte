@@ -1,6 +1,7 @@
 <script context="module">
   import { getDatabase, ref, child, get } from "firebase/database";
   import { initializeApp } from "Firebase/app";
+
   initializeApp({
     apiKey: "AIzaSyAmXYl8867i7nkXHo31bwdIMoeWb35v4I4",
     authDomain: "codeconnect-93fef.firebaseapp.com",
