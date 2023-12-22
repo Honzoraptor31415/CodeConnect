@@ -13,7 +13,7 @@
   }
 </script>
 
-<Nav type="default" />
+<Nav />
 
 <slot />
 

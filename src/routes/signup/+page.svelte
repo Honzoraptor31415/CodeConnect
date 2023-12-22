@@ -1,6 +1,7 @@
 <script context="module">
   import { initializeApp } from "Firebase/app";
   import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+  import { getDatabase, ref, set } from "firebase/database";
 
   const firebaseConfig = {
     apiKey: "AIzaSyAmXYl8867i7nkXHo31bwdIMoeWb35v4I4",
@@ -15,22 +16,32 @@
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+  const database = getDatabase();
 
   if (browser) {
     document.getElementById("submit").addEventListener("click", () => {
-      createUserWithEmailAndPassword(
-        auth,
-        document.getElementById("email").value,
-        document.getElementById("password").value,
-      )
-        .then((userCredential) => {
-          const user = userCredential.user;
-          alert(`Singed up succesfully. Logged in as ${user}`);
-          console.log(user.email);
-        })
-        .catch((error) => {
-          alert(`Error while signing up: ${error}`);
-        });
+      if (
+        document.getElementById("username").value !== "" &&
+        document.getElementById("email").value !== "" &&
+        document.getElementById("password").value !== ""
+      ) {
+        createUserWithEmailAndPassword(
+          auth,
+          document.getElementById("email").value,
+          document.getElementById("password").value,
+        )
+          .then((userCredential) => {
+            const user = userCredential.user;
+            alert(`Singed up succesfully. Logged in as ${user}`);
+            const db = getDatabase();
+            set(ref(db, `cc/users/${user.uid}`), {
+              username: document.getElementById("username").value,
+            });
+          })
+          .catch((error) => {
+            alert(`Error while signing up: ${error}`);
+          });
+      }
     });
   }
 </script>
@@ -47,7 +58,7 @@
   <div class="login-form">
     <h3>Create an account</h3>
     <label for="create-name">Displayed username</label>
-    <input type="text" id="create-name" placeholder="Name" />
+    <input type="text" id="username" placeholder="Name" />
     <label for="email"
       >Email <span class="form-info">(not publicly shown)</span></label
     >
