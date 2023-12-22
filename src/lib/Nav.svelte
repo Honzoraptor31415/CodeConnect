@@ -15,11 +15,10 @@
   });
 
   const auth = getAuth(app);
-  var uid;
+  let uid;
   onAuthStateChanged(auth, (user) => {
     if (user) {
       uid = user.uid;
-      console.log();
       const dbRef = ref(getDatabase());
       const data = get(child(dbRef, `cc/users/${user.uid}`))
         .then((snapshot) => {
@@ -43,10 +42,11 @@
 
   async function loadRole() {
     const dbRef = ref(getDatabase());
+    console.log(uid);
     const data = await get(child(dbRef, `cc/users/${uid}`))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          return snapshot.val();
+          return snapshot.val().role;
         } else {
           console.log("No data");
         }
@@ -55,7 +55,7 @@
         console.error(error);
       });
   }
-  console.log(await loadRole());
+  console.log(await loadRole().role);
 </script>
 
 <script>
