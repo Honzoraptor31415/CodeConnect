@@ -40,22 +40,20 @@
     }
   });
 
-  async function loadRole() {
+  const uidPromise = new Promise((resolve, reject) => {
+    onAuthStateChanged(auth, (user) => {
+      resolve(uid);
+    });
+  });
+
+  async function testLoad() {
+    const newUid = await uidPromise;
     const dbRef = ref(getDatabase());
-    console.log(uid);
-    const data = await get(child(dbRef, `cc/users/${uid}`))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          return snapshot.val().role;
-        } else {
-          console.log("No data");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const snapshot = await get(child(dbRef, `cc/users/${newUid}`));
+    if (snapshot.exists()) {
+      return snapshot.val();
+    }
   }
-  console.log(await loadRole().role);
 </script>
 
 <script>
@@ -81,8 +79,8 @@
 <div id="scroll-detect" class="desktop-nav-wrp">
   <nav id="desktop-nav">
     <div class="nav-content">
-      {#await loadRole() then type}
-        {#if type === "default"}
+      {#await testLoad() then user}
+        {#if user.role === "default"}
           <a href="/" rel="external" class="logo-link">
             <img src={Logo} alt="CodeConnect logo" class="nav-logo" />
           </a>
@@ -92,7 +90,7 @@
             <a href="/login" rel="external" class="menu-link">Login</a>
             <a href="/signup" rel="external" class="menu-btn">Get started</a>
           </div>
-        {:else if type === "dev"}
+        {:else if user.role === "dev"}
           <a href="/" class="logo-link">
             <img src={Logo} alt="CodeConnect logo" class="nav-logo" />
           </a>
@@ -105,23 +103,23 @@
               />
             </a>
             <div class="menu-links">
-              <a href="/posts" class="menu-link">Posts</a>
+              <a rel="external" href="/posts" class="menu-link">Posts</a>
               <a href="/" id="sign-out-user" class="menu-btn">Sign out</a>
             </div>
           </div>
-        {:else if type === "user"}
+        {:else if user.role === "user"}
           <a href="/" class="logo-link">
             <img src={Logo} alt="CodeConnect logo" class="nav-logo" />
           </a>
           <div class="menu">
             <div class="menu-links">
-              <a href="/posts" class="menu-link">Posts</a>
-              <a href="/new" class="menu-btn">New post</a>
+              <a rel="external" href="/posts" class="menu-link">Posts</a>
+              <a rel="external" href="/new" class="menu-btn">New post</a>
               <a href="/" id="sign-out-user" class="menu-btn">Sign out</a>
             </div>
             <a class="pfp-link" href="/">
               <img
-                src="user-icon.svg"
+                src={GandalfLogo}
                 class="profile-img"
                 alt="User placeholder icon"
               />

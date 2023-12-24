@@ -57,7 +57,7 @@
 <header class="form-header">
   <div class="login-form">
     <h3>Create an account</h3>
-    <label for="create-name">Displayed username</label>
+    <label for="username">Displayed username</label>
     <input type="text" id="username" placeholder="Name" />
     <label for="email"
       >Email <span class="form-info">(not publicly shown)</span></label
