@@ -263,6 +263,9 @@ h2 {
 	border: 1px var(--mainFC) solid;
 	transition: .4s;
 	border-radius: 7px;
+	background: transparent;
+	font-size: 13pt;
+	cursor: pointer;
 }
 
 .menu-btn:hover {
@@ -349,7 +352,8 @@ footer>*:not(a) {
 }
 
 .login-form>input,
-.posts-form>input {
+.posts-form>input,
+.login-form>select {
 	background: transparent;
 	border: 1px rgba(255, 255, 255, 0.514) solid;
 	padding: 8px 15px;
@@ -363,13 +367,38 @@ footer>*:not(a) {
 
 .login-form>input:hover,
 .posts-form>input:hover,
-.posts-form>textarea:hover {
+.posts-form>textarea:hover,
+.login-form>select:hover {
 	border-color: white;
+}
+
+select>option {
+	background: var(--tercB);
+	border: 1px rgba(255, 255, 255, 0.514) solid;
+	padding: 6px 13px;
+	font-size: 12pt;
+	border-radius: 7px;
+	transition: .3s;
+	outline: none;
+	min-width: 220px;
+}
+
+.login-form>select {
+	color: grey;
+	box-sizing: content-box;
+}
+
+h3.success {
+	background: rgba(0, 255, 0, 0.229);
+	color: rgb(160, 255, 160);
+	padding: 7px;
+	border-radius: 7px;
 }
 
 .login-form>input:focus::placeholder,
 .posts-form>input:focus::placeholder,
-.posts-form>textarea:focus::placeholder {
+.posts-form>textarea:focus::placeholder,
+.login-form>select:focus {
 	color: var(--mainFC);
 }
 
@@ -420,8 +449,13 @@ footer>*:not(a) {
 }
 
 .form-error {
-	color: red !important;
+	color: white !important;
 	background: rgba(255, 0, 0, 0.264);
+}
+
+.form-success {
+	color: white !important;
+	background: rgba(0, 255, 0, 0.182);
 }
 
 .about-text,

@@ -2,6 +2,17 @@
   import { initializeApp } from "Firebase/app";
   import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
   import { getDatabase, ref, set } from "firebase/database";
+  import { browser } from "$app/environment";
+  import { writable } from "svelte/store";
+  import "../styles.css";
+  if (browser) {
+    document.title = "Create an account";
+    addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        document.getElementById("submit").click();
+      }
+    });
+  }
 
   const firebaseConfig = {
     apiKey: "AIzaSyAmXYl8867i7nkXHo31bwdIMoeWb35v4I4",
@@ -18,6 +29,17 @@
   const auth = getAuth(app);
   const database = getDatabase();
 
+  let form = writable({
+    logged: false,
+    usernameMSG: "Displayed username",
+    emailMSG: "Email ",
+    pwdMSG: "Password",
+  });
+  let rf2d;
+  let rf2 = form.subscribe((val) => {
+    rf2d = val;
+  });
+
   if (browser) {
     document.getElementById("submit").addEventListener("click", () => {
       if (
@@ -32,14 +54,100 @@
         )
           .then((userCredential) => {
             const user = userCredential.user;
-            alert(`Singed up succesfully. Logged in as ${user}`);
+            form.set({
+              logged: true,
+              emailMSG: rf2d.emailMSG,
+              pwdMSG: rf2d.pwdMSG,
+              usernameMSG: "User created succesfully!",
+            });
+            setTimeout(() => {
+              location = "/posts";
+            }, 400);
             const db = getDatabase();
             set(ref(db, `cc/users/${user.uid}`), {
               username: document.getElementById("username").value,
+              role: document.getElementById("role").value,
             });
           })
           .catch((error) => {
-            alert(`Error while signing up: ${error}`);
+            console.log(error, error.code, error.message);
+            switch (error.code) {
+              case "auth/weak-password":
+                form.set({
+                  logged: false,
+                  emailMSG: rf2d.emailMSG,
+                  pwdMSG: "Weak password",
+                  usernameMSG: rf2d.usernameMSG,
+                });
+                break;
+              case "auth/email-already-in-use":
+                form.set({
+                  logged: false,
+                  emailMSG: "Email is already used",
+                  pwdMSG: rf2d.pwdMSG,
+                  usernameMSG: rf2d.usernameMSG,
+                });
+
+              case "auth/id-token-expired":
+                form.set({
+                  logged: false,
+                  emailMSG: rf2d.emailMSG,
+                  pwdMSG: rf2d.pwdMSG,
+                  usernameMSG: "Your ID is expired",
+                });
+
+              case "auth/internal-error":
+                form.set({
+                  logged: false,
+                  emailMSG: rf2d.emailMSG,
+                  pwdMSG: rf2d.pwdMSG,
+                  usernameMSG: "Internal error",
+                });
+
+              case "auth/invalid-argument":
+                form.set({
+                  logged: false,
+                  emailMSG: rf2d.emailMSG,
+                  pwdMSG: rf2d.pwdMSG,
+                  usernameMSG: "Invalid arguments were passed",
+                });
+
+              case "auth/invalid-email":
+                form.set({
+                  logged: false,
+                  emailMSG: "Invalid email",
+                  pwdMSG: rf2d.pwdMSG,
+                  usernameMSG: rf2d.usernameMSG,
+                });
+
+              case "auth/maximum-user-count-exceeded":
+                form.set({
+                  logged: false,
+                  emailMSG: rf2d.emailMSG,
+                  pwdMSG: rf2d.pwdMSG,
+                  usernameMSG: "Too many users",
+                });
+
+              case "auth/session-cookie-expired":
+                form.set({
+                  logged: false,
+                  emailMSG: rf2d.emailMSG,
+                  pwdMSG: rf2d.pwdMSG,
+                  usernameMSG: "The session cookie expired",
+                });
+
+              case "auth/too-many-requests":
+                form.set({
+                  logged: false,
+                  emailMSG: rf2d.emailMSG,
+                  pwdMSG: rf2d.pwdMSG,
+                  usernameMSG: "Too many requests",
+                });
+
+              default:
+                console.log("Error handling default");
+                break;
+            }
           });
       }
     });
@@ -47,23 +155,53 @@
 </script>
 
 <script>
-  import "../styles.css";
-  import { browser } from "$app/environment";
-  if (browser) {
-    document.title = "Create an account";
-  }
+  let formInfo = {
+    logged: false,
+    usernameMSG: "Displayed username",
+    emailMSG: "Email ",
+    pwdMSG: "Password",
+  };
+
+  let formAccess = form.subscribe((val) => {
+    formInfo = val;
+  });
 </script>
 
 <header class="form-header">
   <div class="login-form">
-    <h3>Create an account</h3>
-    <label for="username">Displayed username</label>
-    <input type="text" id="username" placeholder="Name" />
-    <label for="email"
-      >Email <span class="form-info">(not publicly shown)</span></label
-    >
-    <input type="email" id="email" placeholder="Email" />
-    <label for="password">Password</label>
+    {#if formInfo.logged === true}
+      <h3 class="success">Signed up succesfully!</h3>
+    {:else}
+      <h3>Sign up</h3>
+    {/if}
+    {#if formInfo.usernameMSG === "Displayed username"}
+      <label for="username">{formInfo.usernameMSG}</label>
+    {:else}
+      <label for="username" class="form-error">{formInfo.usernameMSG}</label>
+    {/if}
+    <input maxlength="40" type="text" id="username" placeholder="Name" />
+    {#if formInfo.emailMSG === "Email "}
+      <label for="email"
+        >{formInfo.emailMSG}<span class="form-info">(not publicly shown)</span
+        ></label
+      >
+    {:else}
+      <label for="email" class="form-error"
+        >{formInfo.emailMSG}<span class="form-info">(not publicly shown)</span
+        ></label
+      >
+    {/if}
+    <input maxlength="40" type="email" id="email" placeholder="Email" />
+    <label for="role">Role</label>
+    <select id="role">
+      <option value="dev">Developer</option>
+      <option value="user">User</option>
+    </select>
+    {#if formInfo.pwdMSG === "Password"}
+      <label for="password">{formInfo.pwdMSG}</label>
+    {:else}
+      <label for="password" class="form-error">{formInfo.pwdMSG}</label>
+    {/if}
     <input type="password" id="password" placeholder="Password" />
     <button class="login-btn" id="submit">Sign up</button>
   </div>

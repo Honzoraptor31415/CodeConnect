@@ -1,6 +1,20 @@
 <script context="module">
   import { initializeApp } from "Firebase/app";
   import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+  import { writable } from "svelte/store";
+  import "../styles.css";
+  import { browser } from "$app/environment";
+
+  let form = writable({
+    emailMSG: "Email",
+    pwdMSG: "Password",
+    logged: false,
+  });
+
+  let fmrd;
+  let fmr = form.subscribe((val) => {
+    fmrd = val;
+  });
 
   const firebaseConfig = {
     apiKey: "AIzaSyAmXYl8867i7nkXHo31bwdIMoeWb35v4I4",
@@ -17,6 +31,7 @@
   const auth = getAuth(app);
 
   if (browser) {
+    document.title = "Login";
     document.getElementById("login-submit").addEventListener("click", () => {
       signInWithEmailAndPassword(
         auth,
@@ -28,31 +43,45 @@
           alert(`Logged in as ${user.email}`);
         })
         .catch((error) => {
-          alert(`Error while logging in: ${error}`);
+          switch (error) {
+            case "auth/invalid-email":
+              form.set({
+                emailMSG: "Invalid email",
+                pwdMSG: fmrd.pwdMSG,
+                logged: false,
+              });
+              break;
+
+            default:
+              break;
+          }
         });
     });
   }
 </script>
 
 <script>
-  import "../styles.css";
-  import { browser } from "$app/environment";
-  if (browser) {
-    document.title = "Login";
-  }
+  let formInfo = {
+    emailMSG: "Email",
+    pwdMSG: "Password",
+    logged: false,
+  };
+  let formAccess = form.subscribe((val) => {
+    formInfo = val;
+  });
 </script>
 
 <header class="form-header">
   <div class="login-form">
     <h3>Login</h3>
-    <label for="email-login">Email</label>
+    <label for="email-login">{formInfo.emailMSG}</label>
     <input
       autocomplete="email"
       type="email"
       id="email-login"
       placeholder="Email"
     />
-    <label for="password-login">Password</label>
+    <label for="password-login">{formInfo.pwdMSG}</label>
     <input
       autocomplete="current-password"
       type="password"

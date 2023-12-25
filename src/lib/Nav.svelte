@@ -1,7 +1,24 @@
 <script context="module">
   import { initializeApp } from "Firebase/app";
-  import { getAuth, onAuthStateChanged } from "firebase/auth";
+  import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
   import { getDatabase, ref, child, get } from "firebase/database";
+  import { browser } from "$app/environment";
+  import Logo from "$lib/images/code-connect-icon.svg";
+  import GandalfLogo from "$lib/images/gandalf-macbook.jpg";
+
+  if (browser) {
+    document.addEventListener("scroll", () => {
+      if (window.scrollY > 20) {
+        document
+          .getElementById("desktop-nav")
+          ?.classList.add("desktop-nav-off");
+      } else {
+        document
+          .getElementById("desktop-nav")
+          ?.classList.remove("desktop-nav-off");
+      }
+    });
+  }
 
   const app = initializeApp({
     apiKey: "AIzaSyAmXYl8867i7nkXHo31bwdIMoeWb35v4I4",
@@ -56,31 +73,62 @@
   }
 </script>
 
-<script>
-  import { browser } from "$app/environment";
-  import Logo from "$lib/images/code-connect-icon.svg";
-  import GandalfLogo from "$lib/images/gandalf-macbook.jpg";
-
-  if (browser) {
-    document.addEventListener("scroll", () => {
-      if (window.scrollY > 20) {
-        document
-          .getElementById("desktop-nav")
-          ?.classList.add("desktop-nav-off");
-      } else {
-        document
-          .getElementById("desktop-nav")
-          ?.classList.remove("desktop-nav-off");
-      }
-    });
-  }
-</script>
-
 <div id="scroll-detect" class="desktop-nav-wrp">
   <nav id="desktop-nav">
     <div class="nav-content">
       {#await testLoad() then user}
-        {#if user.role === "default"}
+        {#if user && user.role === "dev"}
+          <a href="/" class="logo-link">
+            <img src={Logo} alt="CodeConnect logo" class="nav-logo" />
+          </a>
+          <div class="menu">
+            <a class="pfp-link" href="/">
+              <img
+                src={GandalfLogo}
+                class="profile-img"
+                alt="User placeholder icon"
+              />
+            </a>
+            <div class="menu-links">
+              <a rel="external" href="/posts" class="menu-link">Posts</a>
+              <button
+                on:click={() => {
+                  signOut(auth);
+                  location = "/";
+                }}
+                href="/"
+                id="sign-out-user"
+                class="menu-btn">Sign out</button
+              >
+            </div>
+          </div>
+        {:else if user && user.role === "user"}
+          <a href="/" class="logo-link">
+            <img src={Logo} alt="CodeConnect logo" class="nav-logo" />
+          </a>
+          <div class="menu">
+            <div class="menu-links">
+              <a rel="external" href="/posts" class="menu-link">Posts</a>
+              <a rel="external" href="/new" class="menu-btn">New post</a>
+              <button
+                on:click={() => {
+                  signOut(auth);
+                  location = "/";
+                }}
+                href="/"
+                id="sign-out-user"
+                class="menu-btn">Sign out</button
+              >
+            </div>
+            <a class="pfp-link" href="/">
+              <img
+                src={GandalfLogo}
+                class="profile-img"
+                alt="User placeholder icon"
+              />
+            </a>
+          </div>
+        {:else}
           <a href="/" rel="external" class="logo-link">
             <img src={Logo} alt="CodeConnect logo" class="nav-logo" />
           </a>
@@ -89,41 +137,6 @@
             <a href="/#about" class="menu-link">About</a>
             <a href="/login" rel="external" class="menu-link">Login</a>
             <a href="/signup" rel="external" class="menu-btn">Get started</a>
-          </div>
-        {:else if user.role === "dev"}
-          <a href="/" class="logo-link">
-            <img src={Logo} alt="CodeConnect logo" class="nav-logo" />
-          </a>
-          <div class="menu">
-            <a class="pfp-link" href="/">
-              <img
-                src={GandalfLogo}
-                class="profile-img"
-                alt="User placeholder icon"
-              />
-            </a>
-            <div class="menu-links">
-              <a rel="external" href="/posts" class="menu-link">Posts</a>
-              <a href="/" id="sign-out-user" class="menu-btn">Sign out</a>
-            </div>
-          </div>
-        {:else if user.role === "user"}
-          <a href="/" class="logo-link">
-            <img src={Logo} alt="CodeConnect logo" class="nav-logo" />
-          </a>
-          <div class="menu">
-            <div class="menu-links">
-              <a rel="external" href="/posts" class="menu-link">Posts</a>
-              <a rel="external" href="/new" class="menu-btn">New post</a>
-              <a href="/" id="sign-out-user" class="menu-btn">Sign out</a>
-            </div>
-            <a class="pfp-link" href="/">
-              <img
-                src={GandalfLogo}
-                class="profile-img"
-                alt="User placeholder icon"
-              />
-            </a>
           </div>
         {/if}
       {/await}
