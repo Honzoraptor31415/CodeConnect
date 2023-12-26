@@ -9,3 +9,5 @@ const firebaseConfig = {
 }
 
 const app = initializeApp(FirebaseConfig);
+const auth = getAuth(app);
+const database = getDatabase();
