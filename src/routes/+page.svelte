@@ -1,11 +1,11 @@
 <script>
   import BigDivLogo from "../lib/BigDivLogo.svelte";
   import "./styles.css";
-  import { browser } from "$app/environment";
-  if (browser) {
-    document.title = "CodeConnect - The place, where your dreams come true!";
-  }
 </script>
+
+<svelte:head>
+  <title>CodeConnect - The place, where your dreams come true!</title>
+</svelte:head>
 
 <header>
   <div class="header-left">

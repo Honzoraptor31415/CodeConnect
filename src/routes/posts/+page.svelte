@@ -1,11 +1,6 @@
 <script context="module">
   import GandalfLogo from "$lib/images/gandalf-macbook.jpg";
   import "../styles.css";
-
-  import { browser } from "$app/environment";
-  if (browser) {
-    document.title = "Posts";
-  }
   import { getDatabase, ref, child, get } from "firebase/database";
 
   async function loadData() {
@@ -29,6 +24,10 @@
     return pages;
   }
 </script>
+
+<svelte:head>
+  <title>Posts</title>
+</svelte:head>
 
 <main class="non-header-main">
   <h2>Posts</h2>

@@ -5,7 +5,6 @@
   import { writable } from "svelte/store";
   import "../styles.css";
   if (browser) {
-    document.title = "Create an account";
     addEventListener("keypress", (e) => {
       if (e.key === "Enter") {
         document.getElementById("submit").click();
@@ -150,6 +149,10 @@
     formInfo = val;
   });
 </script>
+
+<svelte:head>
+  <title>Create an account</title>
+</svelte:head>
 
 <header class="form-header">
   <div class="login-form">

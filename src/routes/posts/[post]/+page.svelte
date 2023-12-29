@@ -28,11 +28,11 @@
   import "../../styles.css";
   import GandalfLogo from "$lib/images/gandalf-macbook.jpg";
   export let data;
-  import { browser } from "$app/environment";
-  if (browser) {
-    document.title = "One post";
-  }
 </script>
+
+<svelte:head>
+  <title>One post</title>
+</svelte:head>
 
 <div class="pp-wrp">
   {#await loadData() then dataPages}

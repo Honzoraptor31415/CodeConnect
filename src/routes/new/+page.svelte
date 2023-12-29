@@ -1,10 +1,10 @@
 <script>
   import "../styles.css";
-  import { browser } from "$app/environment";
-  if (browser) {
-    document.title = "Create a new post";
-  }
 </script>
+
+<svelte:head>
+  <title>Create a new post</title>
+</svelte:head>
 
 <header class="form-header">
   <div class="posts-form">

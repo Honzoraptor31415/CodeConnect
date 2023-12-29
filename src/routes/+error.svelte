@@ -1,10 +1,10 @@
 <script>
   import { page } from "$app/stores";
-  import { browser } from "$app/environment";
-  if (browser) {
-    document.title = "Error";
-  }
 </script>
+
+<svelte:head>
+  <title>Error</title>
+</svelte:head>
 
 <body>
   <main>

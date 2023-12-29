@@ -16,7 +16,6 @@
   });
 
   if (browser) {
-    document.title = "Login";
     document.getElementById("login-submit").addEventListener("click", () => {
       signInWithEmailAndPassword(
         auth,
@@ -55,6 +54,10 @@
     formInfo = val;
   });
 </script>
+
+<svelte:head>
+  <title>Login</title>
+</svelte:head>
 
 <header class="form-header">
   <div class="login-form">
